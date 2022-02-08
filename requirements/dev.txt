@@ -1,0 +1,10 @@
+-r base.txt
+
+autopep8==1.5
+black==19.10b0
+django-extensions==3.1.5
+django-debug-toolbar==3.2.4
+flake8==3.8.0
+ipython==8.0.1
+isort==5.10.1
+Werkzeug==2.0.2

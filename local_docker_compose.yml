@@ -1,0 +1,51 @@
+version: "3"
+
+services:
+  django: &django
+    build:
+      context: .
+      dockerfile: ./docker/django/Dockerfile
+    image: cookery_book_django
+    container_name: template_django
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - .:/app
+    env_file:
+      .env
+    command: echo
+
+  django_debug_server:
+    <<: *django
+    command: debug_server
+    container_name: template_django_debug_server
+    ports:
+      - "8000:8000"
+
+
+  redis:
+    image: redis:6.2.6-alpine
+    container_name: template_redis
+    restart: unless-stopped
+
+  celery:
+    <<: *django
+    container_name: template_celery
+    command: celery
+
+  celery-beat:
+    <<: *django
+    container_name: template_celery_beat
+    command: celery_beat
+
+  postgres:
+    image: postgres:14.1
+    container_name: template_postgres
+    ports:
+      - "5432:5432"  # Expose for PgAdmin, in future make sure it won't be exposed
+    env_file:
+      .env
+    restart: unless-stopped
+
+  # configure HTTP server - nginx
