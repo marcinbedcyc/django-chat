@@ -43,6 +43,7 @@ LOCALE_PATHS = [str(ROOT_DIR / 'locale')]
 # ------------------------------------------------------------------------------
 ROOT_URLCONF = 'config.urls'
 WSGI_APPLICATION = 'config.wsgi.application'
+ASGI_APPLICATION = 'config.asgi.application'
 
 # APPS
 # ------------------------------------------------------------------------------
@@ -56,6 +57,7 @@ DJANGO_APPS = [
     'django.forms',
 ]
 THIRD_PARTY_APPS = [
+    'channels',
     'crispy_forms',
     'crispy_bootstrap5',
     'django_filters',
@@ -65,6 +67,7 @@ THIRD_PARTY_APPS = [
     'rosetta',
 ]
 LOCAL_APPS = [
+    f'{APP_NAME}.chat',
     f'{APP_NAME}.users',
     f'{APP_NAME}.utils',
 ]

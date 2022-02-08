@@ -14,6 +14,7 @@ urlpatterns = [
     # Test view for base.html
     path('', TemplateView.as_view(template_name='base.html'), name='base'),
     path("users/", include("django_chat.users.urls", namespace="users")),
+    path("chat/", include("django_chat.chat.urls", namespace="chat")),
     path('i18n/', include('django.conf.urls.i18n')),
     # API base url
     path("api/", include("config.api_router")),
