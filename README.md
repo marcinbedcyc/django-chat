@@ -85,6 +85,10 @@ More complete django startproject with:
     ```
 
 ### Unit tests
+1. Ensure you have Chrome browser installed and Chrome WebDriver for selenium.
+    1. [Install the Chrome Web Browser](https://www.google.com/chrome/)
+    1. [Instal Chrome WebDriver](https://sites.google.com/a/chromium.org/chromedriver/getting-started)
+    1. Add Chrome Web Driver location to `PATH`
 1. If `DJANGO_SETTINGS_MODULE` is set ensure it is equal `config.settings.test` or run tests with `--ds=config.settings.test` parameter.
 1. Run tests with pytest using command:
     ```

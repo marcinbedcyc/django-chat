@@ -7,6 +7,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': ROOT_DIR / 'db.sqlite3',  # noqa
+        # Tweak for Channels live server
+        # https://channels.readthedocs.io/en/stable/topics/testing.html#channelsliveservertestcase
+        'TEST': {
+            'NAME': ROOT_DIR / 'db_test.sqlite3'  # noqa
+        }
     }
 }
 
