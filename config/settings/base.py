@@ -49,14 +49,6 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # CHANNELS
 # ------------------------------------------------------------------------------
 ASGI_APPLICATION = 'config.asgi.application'
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            'hosts': [(env('REDIS_URL'), env('REDIS_PORT'))]
-        }
-    }
-}
 
 # APPS
 # ------------------------------------------------------------------------------
