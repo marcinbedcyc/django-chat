@@ -7,7 +7,9 @@ APP_NAME = 'django_chat'
 
 ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 APP_DIR = ROOT_DIR / APP_NAME
-env = environ.Env()
+env = environ.Env(
+    REDIS_PORT=int
+)
 
 READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=False)
 if READ_DOT_ENV_FILE:
@@ -43,7 +45,18 @@ LOCALE_PATHS = [str(ROOT_DIR / 'locale')]
 # ------------------------------------------------------------------------------
 ROOT_URLCONF = 'config.urls'
 WSGI_APPLICATION = 'config.wsgi.application'
+
+# CHANNELS
+# ------------------------------------------------------------------------------
 ASGI_APPLICATION = 'config.asgi.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [(env('REDIS_URL'), env('REDIS_PORT'))]
+        }
+    }
+}
 
 # APPS
 # ------------------------------------------------------------------------------
