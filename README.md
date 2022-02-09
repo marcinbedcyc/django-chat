@@ -1,32 +1,5 @@
-# django-template
-More complete django startproject with:
-- Docker as development environment with docker compose,
-- Celery - as separate docker container,
-- Redis - as task broker - separate docker container too,
-- better structure - separate config package and tests package from django application module
-- base model for User and base timestamped abstract model for model classes
-- tests run with pytest
-
-### Reusing template
-1. Adjust main project name (change `project` name for custom name, IDE rename tools as very useful there)
-    - setup.cfg
-    - config/api_routers.py
-    - config/celery_app.py
-    - config/urls.py
-    - config/settings/base.py
-    - project directory name
-    - projecttemplates/base.html
-    - project/users
-        - apps.py
-        - models.py
-        - urls.py
-        - apps.py
-    - tests/conftest.py
-    - tests/test_models.py
-    - etc.
-
-1. Adjust settings in config package.
-1. Create .env in root directory, example file in .envs/.env_example
+# Django-chat
+Group chat implemented with Django and django-channels.
 
 ### Development with containers
 1. Ensure docker & docker-compose are installed on your OS
@@ -43,11 +16,11 @@ More complete django startproject with:
         ```
         docker ps
         CONTAINER ID   IMAGE                ... NAME
-        a67a7f1dc051   cookery_book_django  ... template_django_debug_server # <- This container's ID
-        b2ffdb05d42a   cookery_book_django  ... template_celery
-        93b8c012f0b5   cookery_book_django  ... template_celery_beat
-        a0ee8348137e   postgres:14.1        ... template_postgres
-        cf8dd254c372   redis:6.2.6-alpine   ... template_redis
+        a67a7f1dc051   cookery_book_django  ... django_chat_debug_server # <- This container's ID
+        b2ffdb05d42a   cookery_book_django  ... django_chat_celery
+        93b8c012f0b5   cookery_book_django  ... django_chat_celery_beat
+        a0ee8348137e   postgres:14.1        ... django_chat_postgres
+        cf8dd254c372   redis:6.2.6-alpine   ... django_chat_redis
         ```
     1. Run command
         ```bash
@@ -80,8 +53,6 @@ More complete django startproject with:
     python manage.py migrate
     python manage.py createsuperuser
     python manage.py runserver
-    # OR
-    python manage.py runserver_plus
     ```
 
 ### Unit tests
