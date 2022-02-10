@@ -8,18 +8,19 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    # strategy:
-    #   max-parallel: 4
-    #   matrix:
-    #     python-version: [3.7, 3.8, 3.9]
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [3.7, 3.8, 3.9, 3.10]
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python 3.9
+    - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.9
+        python-version: ${{ matrix.python-version }}
     - uses: actions/cache@v2
+      name: Cache Dependencies With Pip
       id: pip-cache
       with:
         path: ~/.cache/pip
@@ -30,7 +31,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements/test.txt
-    - name: Run Flake linter
+    - name: Run Flake Linter
       run: |
         flake8
     - name: Run Tests
