@@ -2,7 +2,9 @@
 import pytest  # noqa
 from channels.testing import ChannelsLiveServerTestCase
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 
 
@@ -12,8 +14,10 @@ class ChatTests(ChannelsLiveServerTestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        options = Options()
+        options.headless = True
         try:
-            cls.driver = webdriver.Chrome()
+            cls.driver = webdriver.Chrome(options=options)
         except Exception:
             super().tearDownClass()
             raise
@@ -99,4 +103,4 @@ class ChatTests(ChannelsLiveServerTestCase):
 
     @property
     def _chat_log_value(self):
-        return self.driver.find_element_by_css_selector('#chat-log').get_property('value')
+        return self.driver.find_element(By.CSS_SELECTOR, '#chat-log').get_property('value')
